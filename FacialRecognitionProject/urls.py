@@ -23,6 +23,5 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('customer/', include(('Customer.urls', 'Customer'), namespace="Customer")),
-    path('auth/', include(('Auth.urls', 'Auth'), namespace="Auth")),
-    path('', views.index, name="index"),
+    path('', include(('Auth.urls', 'Auth'), namespace="Auth")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
