@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <title>Care Tracker-Care your missing by Tracking </title>
+
+    {% load static %}
+    <!-- Favicon -->
+    <link rel="icon" type="image/ico" href='{% static "customer/assets/images/favicon.ico" %}'>
+    <!-- WebFont.js -->
+    <script>
+        WebFontConfig = {
+            google: { families: ['Poppins:400,500,600,700'] }
+        };
+        ( function ( d ) {
+            var wf = d.createElement( 'script' ), s = d.scripts[0];
+            wf.src = '{% static "customer/assets/js/webfont.js" %}';
+            wf.async = true;
+            s.parentNode.insertBefore( wf, s );
+        } )( document );
+    </script>
+
+
+    <link rel="preload" href='{% static "customer/assets/vendor/fontawesome-free/webfonts/fa-regular-400.woff2" %}' as="font" type="font/woff2"
+        crossorigin="anonymous">
+    <link rel="preload" href='{% static "customer/assets/vendor/fontawesome-free/webfonts/fa-solid-900.woff2" %}' as="font" type="font/woff2"
+        crossorigin="anonymous">
+    <link rel="preload" href='{% static "customer/assets/vendor/fontawesome-free/webfonts/fa-brands-400.woff2" %}' as="font" type="font/woff2"
+            crossorigin="anonymous">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" type="text/css" href='{% static "customer/assets/vendor/fontawesome-free/css/all.min.css" %}'>
+    <link rel="stylesheet" href='{% static "customer/assets/vendor/swiper/swiper-bundle.min.css" %}'>
+
+    <!-- Default CSS -->
+    <link rel="stylesheet" type="text/css" href='{% static "customer/assets/css/style.min.css" %}'>
+</head>
+
+<body class="my-account">
+    <div class="page-wrapper">
+        <!-- Start of Header -->
+        <header class="header">
+            <div class="header-top">
+                <div class="container">
+                    <div class="header-left">
+                        <p class="welcome-msg">Welcome to Care Tacker!</p>
+                    </div>
+
+                    <div class="header-right">
+                        <span class="divider d-lg-show"></span>
+                        <a href="{% url 'Auth:logout' %}" class="d-lg-show sign-out"><i
+                                class="w-icon-account"></i>Sign Out</a>
+                        <span class="divider d-lg-show"></span>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- End of Header -->
+
+
+        <!-- Start of Main -->
+        <main class="main">
+            <!-- Start of Page Header -->
+            <div class="page-header">
+                <div class="container">
+                    <h1 class="page-title mb-0">Dashboard</h1>
+                </div>
+            </div>
+            <!-- End of Page Header -->
+
+            <!-- Start of Breadcrumb -->
+            <ul class="breadcrumb"></ul>
+            <!-- End of Breadcrumb -->
+
+            <!-- Start of PageContent -->
+            <div class="page-content pt-2">
+                <div class="container">
+                    {% for message in messages %}
+                        <div class="alert alert-dark alert-bg alert-block alert-inline show-code-action">
+                            {{message}}
+                            <button class="btn btn-link btn-close" aria-label="button">
+                                <i class="close-icon"></i>
+                            </button>
+                        </div>
+                    {% endfor %}
+                    <div class="tab tab-vertical row gutter-lg">
+                        <ul class="nav nav-tabs mb-6" role="tablist">
+                            <li class="nav-item">
+                                <a href="#account-dashboard" id="#dashboard" class="nav-link active">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#account-details" class="nav-link">New Application</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#account-prevApplication" class="nav-link">Previous Application</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#account-profile" class="nav-link">Profile</a>
+                            </li>
+                            <li class="link-item">
+                                <a href="{% url 'Auth:logout' %}">Sign Out</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content mb-6">
+                            <div class="tab-pane active in" id="account-dashboard">
+                                <p class="greeting">
+                                    Hello
+                                    <span class="text-dark font-weight-bold">{{Customer.first_name}} {{Customer.last_name}}</span>
+                                    (not
+                                    <span class="text-dark font-weight-bold">{{Customer.first_name}} {{Customer.last_name}}</span>?
+                                    <a href="{% url 'Auth:logout' %}" class="text-primary">Sign Out</a>)
+                                </p><br>
+
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
+                                        <a href="#account-details" class="link-to-tab">
+                                            <div class="icon-box text-center">
+                                                <span class="icon-box-icon icon-plus">
+                                                    <i class="w-icon-plus"></i>
+                                                </span>
+                                                <div class="icon-box-content">
+                                                    <p class="text-uppercase mb-0">New Application</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
+                                        <a href="#account-prevApplication" class="link-to-tab">
+                                            <div class="icon-box text-center">
+                                                <span class="icon-box-icon icon-orders">
+                                                    <i class=" w-icon-orders"></i>
+                                                </span>
+                                                <div class="icon-box-content">
+                                                    <p class="text-uppercase mb-0">Previous Application</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
+                                        <a href="#account-profile" class="link-to-tab">
+                                            <div class="icon-box text-center">
+                                                <span class="icon-box-icon icon-account">
+                                                    <i class="w-icon-user"></i>
+                                                </span>
+                                                <div class="icon-box-content">
+                                                    <p class="text-uppercase mb-0">Profile</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
+                                        <a href="{% url 'Auth:logout' %}">
+                                            <div class="icon-box text-center">
+                                                <span class="icon-box-icon icon-logout">
+                                                    <i class="w-icon-logout"></i>
+                                                </span>
+                                                <div class="icon-box-content">
+                                                    <p class="text-uppercase mb-0">Sign Out</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="account-details">
+                                <div class="icon-box icon-box-side icon-box-light">
+                                    <span class="icon-box-icon icon-account mr-2">
+                                        <i class="w-icon-user"></i>
+                                    </span>
+                                    <div class="icon-box-content">
+                                        <h4 class="icon-box-title mb-0 ls-normal">Account Details</h4>
+                                    </div>
+                                </div>
+                                <form class="form account-details-form" action="" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>First name *</label>
+                                                {{form.fName}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Last name *</label>
+                                                {{form.lName}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Upload Image *</label>
+                                                {{form.images}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3"></div>
+
+                                    <button type="submit" class="btn btn-dark btn-rounded btn-sm mb-4">Apply</button>
+                                </form>
+                            </div>
+
+                            <div class="tab-pane mb-4" id="account-prevApplication">
+                                <div class="icon-box icon-box-side icon-box-light">
+                                    <span class="icon-box-icon icon-orders">
+                                        <i class="w-icon-orders"></i>
+                                    </span>
+                                    <div class="icon-box-content">
+                                        <h4 class="icon-box-title text-capitalize ls-normal mb-0">Your Applications</h4>
+                                    </div>
+                                </div>
+
+                                <table class="shop-table account-orders-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="order-id">App. ID</th>
+                                            <th class="order-date">Name</th>
+                                            <th class="order-date">Last Track Date</th>
+                                            <th class="order-status">Last Track by</th>
+                                            <th class="order-actions">Found</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        {% for app in prevApp %}
+                                        <tr>
+                                            <td class="order-id justify-content-center">{{app.appId}}</td>
+                                            <td class="order-date">{{app.fName}} {{app.lName}}</td>
+                                            <td class="order-date">{{app.lastTrackDate}}</td>
+                                            <td class="order-status">Camera-{{app.lastTrackLoc}}</td>
+                                            <td class="order-action">
+                                                <form action="{% url 'Customer:changeStatus' %}" method="POST">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" class="form-control" name="appId" value={{app.appId}} readonly>
+                                                    <button type="submit" class="btn btn-sm btn-outline-primary">Remove</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table><br>
+                            </div>
+
+                            <div class="tab-pane" id="account-profile">
+                                <div class="icon-box icon-box-side icon-box-light">
+                                    <span class="icon-box-icon icon-user">
+                                        <i class="w-icon-user"></i>
+                                    </span>
+                                    <div class="icon-box-content">
+                                        <h4 class="icon-box-title mb-0 ls-normal">Account Details</h4>
+                                    </div>
+                                </div>
+                                <div class="tab-pane"></div>
+                                <div class="row">
+                                    <div class="col-sm-6 mb-6">
+                                        <div class="pr-lg-8">
+                                            <h4 class="title title-underline ls-25 font-weight-bold">My Information</h4>
+                                            <address class="mb-4">
+                                                <table class="address-table">
+                                                    <tbody>
+                                                         <tr>
+                                                            <th>Username</th>
+                                                            <td>{{Customer.username}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Name:</th>
+                                                            <td>{{Customer.first_name}} {{Customer.last_name}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Email:</th>
+                                                            <td>{{Customer.email}}</td>
+                                                        </tr>
+                                                         {% if app.lastTrackDate is not None %}
+                                                         <tr>
+                                                            <th>Last Track:</th>
+                                                            <td>
+                                                                at {{app.lastTrackDate}} by {{lastTrackLoc}}
+                                                            </td>
+                                                         </tr>
+                                                         {% endif %}
+                                                    </tbody>
+                                                </table>
+                                            </address>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 mb-6">
+                                        <div class="ecommerce-address shipping-address pr-lg-8">
+                                            <h4 class="title title-underline ls-25 font-weight-bold">Last Application</h4>
+                                            <address class="mb-4">
+                                                <table class="address-table">
+                                                    {% for app in prevApp %}
+                                                    {% if forloop.last %}
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Application ID:</th>
+                                                            <td>{{app.appId}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Name:</th>
+                                                            <td>{{app.fName}} {{app.lName}}</td>
+                                                        <tr>
+                                                            <th>Found Status:</th>
+                                                            <td>{{app.found}}</td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                    {% endif %}
+                                                    {% endfor %}
+                                                </table>
+                                            </address>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of PageContent -->
+        </main>
+        <!-- End of Main -->
+
+        <!-- Start of Footer -->
+        <footer class="footer appear-animate" data-animation-options="{
+            'name': 'fadeIn'
+        }">
+            <div class="footer-newsletter bg-primary pt-6 pb-6">
+                <div class="container">
+                    <div class="row justify-content-center align-items-center">
+                    </div>
+                </div>
+            </div>
+            <div class="container">`
+                <div class="footer-top">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="widget widget-about">
+                                <a class="logo-footer">
+                                    <img src='{% static "customer/assets/images/logo.png" %}' alt="logo-footer" width="288" height="54">
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="footer-left">
+                        <p class="copyright">Copyright © 2022 Care Taker Team. All Rights Reserved.</p>
+                    </div>
+                    <div class="footer-right">
+                        <span class="payment-label mr-lg-8">Images will be deleted, when user removes its application.</span>
+                        <p class="copyright">We care Privacy.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+    </div>
+    <!-- End of Page-wrapper-->
+
+    <!-- Start of Scroll Top -->
+    <a id="scroll-top" class="scroll-top" href="#top" title="Top" role="button"> <i class="w-icon-angle-up"></i> <svg
+            version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70">
+            <circle id="progress-indicator" fill="transparent" stroke="#000000" stroke-miterlimit="10" cx="35" cy="35"
+                r="34" style="stroke-dasharray: 16.4198, 400;"></circle>
+        </svg> </a>
+    <!-- End of Scroll Top -->
+
+    <!-- Plugin JS File -->
+    <script src='{% static "customer/assets/vendor/swiper/swiper-bundle.min.js" %}'></script>
+    <script src='{% static "customer/assets/vendor/jquery/jquery.min.js" %}'></script>
+    <script src='{% static "customer/assets/js/main.min.js" %}'></script>
+</body>
+</html>
