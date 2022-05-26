@@ -25,6 +25,7 @@ SECRET_KEY = 'django-insecure-tuzu6)0w$a@^t)_&y=ma9p(ze(d&0-(u2@bqmvfw$m)xlb$fno
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://caretrackerfr.azurewebsites.net']
 
 # Application definition
 
@@ -134,6 +135,7 @@ if DEBUG:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
