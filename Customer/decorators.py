@@ -1,9 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from PIL import Image
-from django.core.files.base import ContentFile
-from io import BytesIO, StringIO
 import cv2
+import os
+
+STATIC_HOST = os.environ.get("DJANGO_STATIC_HOST", "")
+if STATIC_HOST != "":
+    STATIC_HOST += "/"
 
 
 def unauthenticated_user(view_func):
@@ -53,10 +56,9 @@ def admin_only(view_func):
 
 
 def haveFaces(img):
-    face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-    img = cv2.imread('media/' + img)
+    face_cascade = cv2.CascadeClassifier(os.path.join(cv2.data.haarcascades, 'haarcascade_frontalface_default.xml'))
+    img = cv2.imread(STATIC_HOST + 'media/' + img)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
     if len(faces) == 1:
         return True, faces[0]
@@ -65,7 +67,7 @@ def haveFaces(img):
 
 def cropper(img, cord):
     x, y, w, h = cord
-    original_image = Image.open('media/' + img)
+    original_image = Image.open(STATIC_HOST + 'media/' + img)
     cropped_img = original_image.crop((x, y, x + w, y + h))
-    cropped_img.save('media/'+img)
+    cropped_img.save(STATIC_HOST + 'media/' + img)
 

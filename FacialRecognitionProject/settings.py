@@ -24,9 +24,9 @@ SECRET_KEY = 'django-insecure-tuzu6)0w$a@^t)_&y=ma9p(ze(d&0-(u2@bqmvfw$m)xlb$fno
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://caretrackerfr.azurewebsites.net']
-
+ALLOWED_HOSTS = ['caretrackerfr.azurewebsites.net', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://caretrackerfr.azurewebsites.net', 'http://127.0.0.1:8000']
+# ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'Customer.apps.CustomerConfig',
     'Auth.apps.AuthConfig',
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'FacialRecognitionProject.urls'
@@ -73,27 +75,27 @@ WSGI_APPLICATION = 'FacialRecognitionProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'mssql',
-#         'NAME': 'EngageFrDatabase',
-#         'USER': 'engagefr',
-#         'PASSWORD': 'Engage@123',
-#         'HOST': 'engagefr.database.windows.net',
-#         'PORT': '',
-#
-#         'OPTIONS': {
-#             'driver': 'ODBC Driver 17 for SQL Server',
-#         },
-#     },
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'mssql',
+        'NAME': 'EngageFrDatabase',
+        'USER': 'engagefr',
+        'PASSWORD': 'Engage@123',
+        'HOST': 'engagefr.database.windows.net',
+        'PORT': '',
+
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+        },
+    },
+}
 
 # set this to False if you want to turn off pyodbc's connection pooling
 DATABASE_CONNECTION_POOLING = False
@@ -130,12 +132,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
-if DEBUG:
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
+STATIC_HOST = os.environ.get("DJANGO_STATIC_HOST", "")
+STATIC_URL = STATIC_HOST + "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
