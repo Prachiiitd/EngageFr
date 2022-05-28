@@ -11,7 +11,7 @@
 
     {% load static %}
     <!-- Favicon -->
-    <link rel="icon" type="image/ico" href='{% static "auth/assets/images/favicon.ico" %}'>
+    <link rel="icon" type="image/ico" href='{% static "auth/images/favicon.ico" %}'>
     <!-- WebFont.js -->
     <script>
         WebFontConfig = {
@@ -19,25 +19,25 @@
         };
         ( function ( d ) {
             var wf = d.createElement( 'script' ), s = d.scripts[0];
-            wf.src = '{% static "auth/assets/js/webfont.js" %}';
+            wf.src = '{% static "auth/js/webfont.js" %}';
             wf.async = true;
             s.parentNode.insertBefore( wf, s );
         } )( document );
     </script>
 
-    <link rel="preload" href='{% static "auth/assets/vendor/fontawesome-free/webfonts/fa-regular-400.woff2" %}' as="font" type="font/woff2"
+    <link rel="preload" href='{% static "auth/vendor/fontawesome-free/webfonts/fa-regular-400.woff2" %}' as="font" type="font/woff2"
         crossorigin="anonymous">
-    <link rel="preload" href='{% static "auth/assets/vendor/fontawesome-free/webfonts/fa-solid-900.woff2" %}' as="font" type="font/woff2"
+    <link rel="preload" href='{% static "auth/vendor/fontawesome-free/webfonts/fa-solid-900.woff2" %}' as="font" type="font/woff2"
         crossorigin="anonymous">
-    <link rel="preload" href='{% static "auth/assets/vendor/fontawesome-free/webfonts/fa-brands-400.woff2" %}' as="font" type="font/woff2"
+    <link rel="preload" href='{% static "auth/vendor/fontawesome-free/webfonts/fa-brands-400.woff2" %}' as="font" type="font/woff2"
             crossorigin="anonymous">
 
     <!-- Vendor CSS -->
-    <link rel="stylesheet" type="text/css" href='{% static "auth/assets/vendor/fontawesome-free/css/all.min.css" %}'>
-    <link rel="stylesheet" href='{% static "auth/assets/vendor/swiper/swiper-bundle.min.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "auth/vendor/fontawesome-free/css/all.min.css" %}'>
+    <link rel="stylesheet" href='{% static "auth/vendor/swiper/swiper-bundle.min.css" %}'>
 
     <!-- Default CSS -->
-    <link rel="stylesheet" type="text/css" href='{% static "auth/assets/css/style.min.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "auth/css/style.min.css" %}'>
 </head>
 
 <body>
@@ -186,7 +186,7 @@
                         <div class="col-lg-4 col-sm-6">
                             <div class="widget widget-about">
                                 <a class="logo-footer">
-                                    <img src='{% static "auth/assets/images/logo.png" %}' alt="logo-footer" width="288" height="54">
+                                    <img src='{% static "auth/images/logo.png" %}' alt="logo-footer" width="288" height="54">
                                 </a>
                             </div>
                         </div>
@@ -214,7 +214,7 @@
 
 
     <!-- Plugin JS File -->
-    <script src='{% static "auth/assets/vendor/jquery/jquery.min.js" %}'></script>
-    <script src='{% static "auth/assets/js/main.min.js" %}'></script>
+    <script src='{% static "auth/vendor/jquery/jquery.min.js" %}'></script>
+    <script src='{% static "auth/js/main.min.js" %}'></script>
 </body>
 </html>

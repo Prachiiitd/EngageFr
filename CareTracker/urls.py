@@ -1,4 +1,4 @@
-"""FacialRecognitionProject URL Configuration
+"""CareTracker URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
@@ -20,10 +20,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 
-
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),  # Url for admin page
+
+    # Url included fom Customer App with starting path as /customer
     path('customer/', include(('Customer.urls', 'Customer'), namespace="Customer")),
+
+    # Url included fom Auth App with starting path as /auth
     path('auth/', include(('Auth.urls', 'Auth'), namespace="Auth")),
-    path('', views.index, name="index")
+
+    path('', views.index, name="index")  # Url for the index page in the Car tracker app
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

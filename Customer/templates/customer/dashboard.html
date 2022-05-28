@@ -9,7 +9,7 @@
 
     {% load static %}
     <!-- Favicon -->
-    <link rel="icon" type="image/ico" href='{% static "customer/assets/images/favicon.ico" %}'>
+    <link rel="icon" type="image/ico" href='{% static "customer/images/favicon.ico" %}'>
     <!-- WebFont.js -->
     <script>
         WebFontConfig = {
@@ -17,26 +17,26 @@
         };
         ( function ( d ) {
             var wf = d.createElement( 'script' ), s = d.scripts[0];
-            wf.src = '{% static "customer/assets/js/webfont.js" %}';
+            wf.src = '{% static "customer/js/webfont.js" %}';
             wf.async = true;
             s.parentNode.insertBefore( wf, s );
         } )( document );
     </script>
 
 
-    <link rel="preload" href='{% static "customer/assets/vendor/fontawesome-free/webfonts/fa-regular-400.woff2" %}' as="font" type="font/woff2"
+    <link rel="preload" href='{% static "customer/vendor/fontawesome-free/webfonts/fa-regular-400.woff2" %}' as="font" type="font/woff2"
         crossorigin="anonymous">
-    <link rel="preload" href='{% static "customer/assets/vendor/fontawesome-free/webfonts/fa-solid-900.woff2" %}' as="font" type="font/woff2"
+    <link rel="preload" href='{% static "customer/vendor/fontawesome-free/webfonts/fa-solid-900.woff2" %}' as="font" type="font/woff2"
         crossorigin="anonymous">
-    <link rel="preload" href='{% static "customer/assets/vendor/fontawesome-free/webfonts/fa-brands-400.woff2" %}' as="font" type="font/woff2"
+    <link rel="preload" href='{% static "customer/vendor/fontawesome-free/webfonts/fa-brands-400.woff2" %}' as="font" type="font/woff2"
             crossorigin="anonymous">
 
     <!-- Vendor CSS -->
-    <link rel="stylesheet" type="text/css" href='{% static "customer/assets/vendor/fontawesome-free/css/all.min.css" %}'>
-    <link rel="stylesheet" href='{% static "customer/assets/vendor/swiper/swiper-bundle.min.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "customer/vendor/fontawesome-free/css/all.min.css" %}'>
+    <link rel="stylesheet" href='{% static "customer/vendor/swiper/swiper-bundle.min.css" %}'>
 
     <!-- Default CSS -->
-    <link rel="stylesheet" type="text/css" href='{% static "customer/assets/css/style.min.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "customer/css/style.min.css" %}'>
 </head>
 
 <body class="my-account">
@@ -347,7 +347,7 @@
                         <div class="col-lg-4 col-sm-6">
                             <div class="widget widget-about">
                                 <a class="logo-footer">
-                                    <img src='{% static "customer/assets/images/logo.png" %}' alt="logo-footer" width="288" height="54">
+                                    <img src='{% static "customer/images/logo.png" %}' alt="logo-footer" width="288" height="54">
                                 </a>
                             </div>
                         </div>
@@ -378,8 +378,8 @@
     <!-- End of Scroll Top -->
 
     <!-- Plugin JS File -->
-    <script src='{% static "customer/assets/vendor/swiper/swiper-bundle.min.js" %}'></script>
-    <script src='{% static "customer/assets/vendor/jquery/jquery.min.js" %}'></script>
-    <script src='{% static "customer/assets/js/main.min.js" %}'></script>
+    <script src='{% static "customer/vendor/swiper/swiper-bundle.min.js" %}'></script>
+    <script src='{% static "customer/vendor/jquery/jquery.min.js" %}'></script>
+    <script src='{% static "customer/js/main.min.js" %}'></script>
 </body>
 </html>
