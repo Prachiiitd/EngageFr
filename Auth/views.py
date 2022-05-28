@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect  # Import the render and redirect functions.
-from django.contrib.auth import authenticate, login, logout  # Import to authenticate, login, and logout methods.
 from django.contrib import messages  # Import the messages' framework.
+from django.contrib.auth import authenticate, login, logout  # Import to authenticate, login, and logout methods.
 from django.contrib.auth.models import Group  # Import the Group model.
+from django.shortcuts import render, redirect  # Import the render and redirect functions.
 
-from .forms import CreateUserForm  # Import the CreateUserForm class from the forms.py file.
 from .decorators import unauthenticated_user  # Import the required decorator.
-from .models import Customer  # Import the Customer model from the models.py file.
+from .forms import CreateUserForm  # Import the CreateUserForm class from the forms.py file.
+from .models import Customer, CameraIP  # Import the Customer model from the models.py file.
 
 # Create your views here.
 
@@ -52,9 +52,9 @@ def index(request):
             messages.success(request, f'Account created for {username}!')  # Display a success message to the user.
 
         else:  # If the form is not valid, then display the appropriate error message to the user.
-            for field, errors in form.errors.items():
+            for field, error in form.errors.items():
                 # For each erroneous field in the form, get the errors and display them to the user.
-                messages.error(request, f'{field}: {errors}')
+                messages.error(request, error)
 
         return redirect('Auth:authIndex')  # Redirect the user to the index page again.
 
@@ -99,3 +99,45 @@ def logoutUser(request):
         messages.success(request, f'Logout successful!')  # Display a success message to the user.
 
     return redirect('Auth:authIndex')   # Redirect the user to the login present in index page again.
+
+
+def admin(request):
+    """
+    This method is used to display the Admin page used to add camera ips.
+    .POST: This is used to check if the form has been submitted.
+    .authenticate: Checks if a user with the given credentials exists and return the user object if it does.
+    """
+
+    # If the request is a POST request, then process the form data as below.
+    if request.method == 'POST':
+        username = request.POST.get('username')  # Get the username from the POST request data.
+        address = request.POST.get('address')   # Get the address from the POST request data.
+        ipaddress = request.POST.get('ipaddress')  # Get the cameraIp from the POST request data.
+        password = request.POST.get('password')  # Get the password from the POST request data.
+
+        user = authenticate(request, username=username, password=password)  # Authenticate the user.
+        if user is not None and user.groups.exists():  # Check if the user belongs to any group.
+            # Get the very first group of the user and store it in the group variable.
+            group = user.groups.all()[0].name
+            if group == "ipadders":
+                # If the user belongs to the group named as ipadders, then add the camera ip to the database.
+                if CameraIP.objects.filter(ipaddress=ipaddress).exists():  # Check if the camera ip already exists.
+                    messages.error(request, f'Camera IP already exists!')  # Display an error message to the user.
+
+                else:
+                    # If the camera ip does not exist, then add the camera ip to the database.
+                    camera = CameraIP(ipaddress=ipaddress, address=address)
+                    camera.save()
+                    # Display a success message to the user and redirect the user to the ipAdder admin page again.
+                    messages.success(request, f'Camera IP added successfully!')
+            else:
+                # If the user does not belong to the group named as ipadders, then display an error message to the user.
+                messages.error(request, f'You are not authorized to add camera IP!')
+        else:
+            # If the user does not belong to any group, then display an error message to the user.
+            messages.error(request, f'Invalid Username or password ')
+
+        return redirect('Auth:admin')  # Redirect the user to the login present in index page again.
+    else:
+        # If the request is not a POST request, then display the ipAdder admin page.
+        return render(request, 'auth/adminIp.html')  # Render the ipAdder admin page.

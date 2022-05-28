@@ -13,4 +13,6 @@ urlpatterns = [  # List of URL patterns for the Auth app.
     path("", views.index, name="authIndex"),  # URL for the index page.
     path("login/", views.loginUser, name="login"),  # URL for the login method used.
     path("logout/", views.logoutUser, name="logout"),  # URL for the logout method used.
+    path("admin/", views.admin, name="admin"),  # URL to add the Camera Ip.
 ]
+

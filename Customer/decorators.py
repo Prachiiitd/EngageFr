@@ -122,15 +122,15 @@ def haveFaces(img):
 
     # Object of class CascadeClassifier is created.
     face_cascade = cv2.CascadeClassifier(os.path.join(cv2.data.haarcascades, 'haarcascade_frontalface_alt2.xml'))
-    img = cv2.imread(STATIC_HOST + img)  # Read the image.
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # Convert the image to grayscale.
+    cv_img = cv2.imread(STATIC_HOST + img)  # Read the image.
+    gray = cv2.cvtColor(cv_img, cv2.COLOR_BGR2GRAY)  # Convert the image to grayscale.
     faces = face_cascade.detectMultiScale(gray, 1.3, 3)  # Detect the faces.
-
+    print(faces)
     if len(faces) == 1:  # Check if the image contains a single human face or not.
         cropper(img, faces[0])  # Crop the face.
         return True  # Return True and the face coordinates.
     else:
-        return False, None  # Return False and None.
+        return False  # Return False and None.
 
 
 def cropper(img, cord):
@@ -145,4 +145,3 @@ def cropper(img, cord):
     original_image = Image.open(STATIC_HOST + img)  # Open the image.
     cropped_img = original_image.crop((x, y, x + w, y + h))  # Crop the image.
     cropped_img.save(STATIC_HOST + img)  # Save the cropped image.
-

@@ -240,7 +240,7 @@
                                             <td class="order-date">{{app.lastTrackDate}}</td>
                                             <td class="order-status">Camera-{{app.lastTrackLoc}}</td>
                                             <td class="order-action">
-                                                <form action="{% url 'Customer:changeStatus' %}" method="POST">
+                                                <form action="{% url 'Customer:remove' %}" method="POST">
                                                     {% csrf_token %}
                                                     <input type="hidden" class="form-control" name="appId" value={{app.appId}} readonly>
                                                     <button type="submit" class="btn btn-sm btn-outline-primary">Remove</button>
@@ -300,7 +300,7 @@
                                             <address class="mb-4">
                                                 <table class="address-table">
                                                     {% for app in prevApp %}
-                                                    {% if forloop.last %}
+                                                    {% if forloop.counter <= 5 %}
                                                     <tbody>
                                                         <tr>
                                                             <th>Application ID:</th>
@@ -313,7 +313,6 @@
                                                             <th>Found Status:</th>
                                                             <td>{{app.found}}</td>
                                                         </tr>
-
                                                     </tbody>
                                                     {% endif %}
                                                     {% endfor %}
