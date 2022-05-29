@@ -1,0 +1,10 @@
+{
+  "API_KEY": "2037332be3144d2388abe76d519fc29c",
+  "ENDPOINT": "https://engagefr.cognitiveservices.azure.com",
+  "server": "engagefr.database.windows.net",
+  "database": "EngageFrDatabase",
+  "username": "engagefr",
+  "password": "Engage@123",
+  "driver": "{ODBC Driver 18 for SQL Server}",
+  "host": "https://caretrackerfr.azurewebsites.net/media/"
+}
